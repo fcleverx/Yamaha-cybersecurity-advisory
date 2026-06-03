@@ -1,0 +1,5 @@
+node_modules/
+_site/
+playwright-report/
+test-results/
+baseline-critical-path-audit-results.json
