@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Send - Awareness Newsletter</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    body{margin:0;background:#FFFFFF;color:#000000;font-family:'DM Sans',sans-serif}
+    .wrap{max-width:1100px;margin:0 auto;padding:1rem}
+    .btn{border:1px solid rgba(0,0,0,.15);background:transparent;color:#000000;padding:.45rem .8rem;border-radius:6px;cursor:pointer}
+    .btn.primary{border-color:#2627e0;color:#2627e0}
+    .card{border:1px solid rgba(0,0,0,.09);border-radius:8px;background:#FFFFFF;padding:.8rem;margin-bottom:.7rem}
+    input{background:#FFFFFF;border:1px solid rgba(0,0,0,.12);color:#000000;padding:.4rem .5rem;border-radius:6px}
+    .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.55rem}
+    .rollback-banner{
+      display:none;
+      margin:.2rem 0 .7rem;
+      padding:.6rem .75rem;
+      border-radius:8px;
+      border:1px solid rgba(234,187,93,.45);
+      background:rgba(234,187,93,.12);
+      color:#000000;
+      font-size:.76rem;
+      line-height:1.45;
+    }
+    #nl-out{max-width:700px;margin:0 auto;background:#fff;color:#000}
+    @media (max-width: 1024px){
+      .wrap{max-width:100%;padding:.8rem}
+      .btn{min-height:40px}
+    }
+    @media (max-width: 640px){
+      .wrap{padding:.6rem}
+      .btn{flex:1;min-width:120px}
+      .row{grid-template-columns:1fr}
+      #nl-out{max-width:100%}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 style="font-family:'DM Serif Display',serif;margin:.2rem 0 .8rem">Send</h1>
+    <div id="ai-rollback-banner" class="rollback-banner" role="status" aria-live="polite"></div>
+    <div style="display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:.7rem">
+      <button class="btn" onclick="App.RouterNav.goto('projects.html',{ source:'send' })">Projects</button>
+      <button class="btn" onclick="window.location.href='config.html'">Config</button>
+      <button class="btn" onclick="window.location.href='keywords.html'">Keywords</button>
+      <button class="btn" onclick="App.UI.goToHomePage()">Home</button>
+      <button class="btn" onclick="App.UI.goToPreviewPage()">Preview</button>
+      <button class="btn" onclick="App.RouterNav.goto('editor.html', App.RouterNav.getHandoff() || {})">Editor</button>
+    </div>
+
+    <div class="card">
+      <div style="font-size:.78rem;color:#000000;line-height:1.55">
+        Email delivery (Microsoft Graph or SMTP relay) is configured in <strong>Configuration</strong>. Update recipients or relay details there, then return here to send.
+      </div>
+      <div style="display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.6rem">
+        <button class="btn" onclick="window.location.href='config.html'">Open Config</button>
+        <button class="btn" onclick="App.UI.sendTestEmail()">Send Test</button>
+        <button class="btn primary" onclick="App.UI.sendNewsletter()">Send Newsletter</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-bottom:.6rem">
+        <select id="preview-lang" onchange="App.UI.switchPreviewLanguage(this.value)"></select>
+        <select id="wf-next-state"></select>
+        <span id="wf-state-chip" style="padding:.3rem .6rem;border:1px solid #555;border-radius:999px">Draft</span>
+      </div>
+      <div class="nl" id="nl-out"></div>
+    </div>
+
+    <div id="delivery-log-list" class="card"></div>
+  </div>
+
+  <input id="cfg-freq" value="Weekly" hidden><input id="cfg-soc" value="SOC-support@abc.com" hidden>
+  <input id="cfg-max" value="2" hidden>
+  <input id="meta-title" value="Security Awareness Bulletin" hidden><input id="meta-issue-date" hidden><input id="meta-status" value="draft" hidden>
+  <input id="project-title" hidden><span id="project-version-label" hidden></span>
+  <input id="feat-poster" type="checkbox" checked hidden><input id="feat-links" type="checkbox" checked hidden><input id="feat-qr" type="checkbox" checked hidden><input id="feat-illus" type="checkbox" checked hidden>
+  <input id="feat-ai" type="checkbox" checked hidden><input id="ai-provider" value="claude" hidden><input id="ai-key" hidden>
+  <input id="smtp-relay-url" hidden><input id="smtp-host" hidden><input id="smtp-port" value="587" hidden><input id="smtp-username" hidden><input id="smtp-password" hidden>
+  <input id="smtp-from-name" value="Security Team" hidden><input id="smtp-from-address" hidden><input id="smtp-test-to" hidden><input id="smtp-send-to" hidden><input id="smtp-secure" type="checkbox" checked hidden>
+  <select id="delivery-method" hidden><option value="smtp">SMTP relay (legacy)</option><option value="graph">Microsoft Graph (Outlook)</option></select>
+  <input id="graph-tenant-id" hidden><input id="graph-client-id" hidden><input id="graph-client-secret" hidden>
+  <div id="delivery-graph-panel" hidden></div><div id="delivery-smtp-panel" hidden></div>
+  <div id="saved-drafts-list" hidden></div><div id="db-stats" hidden></div><div id="feed-status-area" hidden></div><div id="feed-sources-dashboard" hidden></div><div id="sb-feeds-list" hidden></div><div id="articles-area" hidden></div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/router_nav.js"></script>
+  <script src="js/ux_contract.js"></script>
+  <script src="js/feed_scoring.js"></script>
+  <script src="js/keyword_store.js"></script>
+  <script src="js/project_store.js"></script>
+  <script src="js/responsive_layout.js"></script>
+  <script src="js/rss_fetcher.js"></script>
+  <script src="js/ai_summarizer.js"></script>
+  <script src="js/graphics_engine.js"></script>
+  <script src="js/newsletter_builder.js"></script>
+  <script src="js/translation_metrics.js"></script>
+  <script src="js/delivery_helpers.js"></script>
+  <script src="js/ui_controller.js"></script>
+  <script src="js/editor.js"></script>
+  <script>
+    App.UXContract?.init({ pageId: 'send', flowStepId: 'send', guard: 'workspace-required' });
+    if (App.ResponsiveLayout?.init) App.ResponsiveLayout.init();
+    App.UI.init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,401 @@
+{
+  "startedAt": "2026-05-05T06:09:47.952Z",
+  "baseUrl": "http://127.0.0.1:4173",
+  "checks": [
+    {
+      "name": "index-load-and-fetch",
+      "status": "pass",
+      "notes": [
+        "Loaded index.html and core article area.",
+        "fetch-st: \"34 articles ready\"",
+        "article cards rendered: 34",
+        "status-log has content: true",
+        "network resource errors observed: 45"
+      ],
+      "startedAt": "2026-05-05T06:09:47.953Z",
+      "finishedAt": "2026-05-05T06:10:31.012Z"
+    },
+    {
+      "name": "curate-select-build-flow",
+      "status": "pass",
+      "notes": [
+        "cards available for curation: 34",
+        "Selected first article card.",
+        "preview visible: false",
+        "newsletter output text length: 2457"
+      ],
+      "startedAt": "2026-05-05T06:10:31.012Z",
+      "finishedAt": "2026-05-05T06:10:40.426Z"
+    },
+    {
+      "name": "editor-page-load",
+      "status": "pass",
+      "notes": [
+        "editor title found: true",
+        "iframe count: 1"
+      ],
+      "startedAt": "2026-05-05T06:10:40.426Z",
+      "finishedAt": "2026-05-05T06:10:42.994Z"
+    },
+    {
+      "name": "send-page-load-and-actions",
+      "status": "pass",
+      "notes": [
+        "delivery log text length: 846"
+      ],
+      "startedAt": "2026-05-05T06:10:42.994Z",
+      "finishedAt": "2026-05-05T06:10:46.215Z"
+    },
+    {
+      "name": "projects-and-keywords-routes",
+      "status": "pass",
+      "notes": [
+        "projects title found: true",
+        "keywords title found: true",
+        "critical keyword input found: true"
+      ],
+      "startedAt": "2026-05-05T06:10:46.215Z",
+      "finishedAt": "2026-05-05T06:10:46.301Z"
+    },
+    {
+      "name": "date-sort-control",
+      "status": "pass",
+      "notes": [
+        "first card date before: 05 May 2026 · Today",
+        "first card date after asc: 29 Apr 2026 · 6 days ago",
+        "distinct visible dates: 6"
+      ],
+      "startedAt": "2026-05-05T06:10:46.301Z",
+      "finishedAt": "2026-05-05T06:10:49.340Z"
+    },
+    {
+      "name": "keywords-search-suggest-delete",
+      "status": "pass",
+      "notes": [
+        "critical suggestions count: 1",
+        "critical search contains injected keyword: true",
+        "counts after delete-all + reset: critical=47, context=8"
+      ],
+      "startedAt": "2026-05-05T06:10:49.340Z",
+      "finishedAt": "2026-05-05T06:10:50.053Z"
+    },
+    {
+      "name": "config-source-add-delete-and-persistence",
+      "status": "pass",
+      "notes": [
+        "custom source added: true",
+        "config SOC propagated to index: true"
+      ],
+      "startedAt": "2026-05-05T06:10:50.053Z",
+      "finishedAt": "2026-05-05T06:10:52.200Z"
+    }
+  ],
+  "errors": [
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 404 ()",
+      "at": "2026-05-05T06:09:50.276Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 520 ()",
+      "at": "2026-05-05T06:09:50.797Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 404 ()",
+      "at": "2026-05-05T06:09:50.988Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 403 ()",
+      "at": "2026-05-05T06:09:51.154Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 403 ()",
+      "at": "2026-05-05T06:09:52.396Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 520 ()",
+      "at": "2026-05-05T06:09:59.023Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 404 ()",
+      "at": "2026-05-05T06:09:59.024Z"
+    },
+    {
+      "type": "console",
+      "message": "Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Fwww.cert-in.org.in%2Fs2cMainServlet%3Fpageid%3DRSSADVISORY' from origin 'http://127.0.0.1:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "at": "2026-05-05T06:09:59.285Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "at": "2026-05-05T06:09:59.285Z"
+    },
+    {
+      "type": "console",
+      "message": "Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Fwww.cyber.gov.au%2Frss.xml' from origin 'http://127.0.0.1:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "at": "2026-05-05T06:09:59.293Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "at": "2026-05-05T06:09:59.298Z"
+    },
+    {
+      "type": "console",
+      "message": "Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Fcsrc.nist.gov%2FCSRC%2Fmedia%2FPublications%2Ffeeds%2Fnist-publications-rss.xml' from origin 'http://127.0.0.1:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "at": "2026-05-05T06:09:59.307Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "at": "2026-05-05T06:09:59.307Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 404 ()",
+      "at": "2026-05-05T06:09:59.362Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 429 ()",
+      "at": "2026-05-05T06:10:03.490Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 429 ()",
+      "at": "2026-05-05T06:10:03.660Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 429 ()",
+      "at": "2026-05-05T06:10:03.802Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 429 ()",
+      "at": "2026-05-05T06:10:03.803Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 429 ()",
+      "at": "2026-05-05T06:10:03.891Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 500 ()",
+      "at": "2026-05-05T06:10:04.583Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 520 ()",
+      "at": "2026-05-05T06:10:04.706Z"
+    },
+    {
+      "type": "console",
+      "message": "Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Fwww.cyber.gov.au%2Frss-feeds%2Frss.xml' from origin 'http://127.0.0.1:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "at": "2026-05-05T06:10:04.739Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "at": "2026-05-05T06:10:04.739Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 500 ()",
+      "at": "2026-05-05T06:10:05.017Z"
+    },
+    {
+      "type": "console",
+      "message": "Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Fwww.nist.gov%2Fnews-events%2Frss.xml' from origin 'http://127.0.0.1:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "at": "2026-05-05T06:10:05.180Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "at": "2026-05-05T06:10:05.180Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 404 ()",
+      "at": "2026-05-05T06:10:06.789Z"
+    },
+    {
+      "type": "console",
+      "message": "Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Fwww.mandiant.com%2Fresources%2Fblog%2Frss.xml' from origin 'http://127.0.0.1:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "at": "2026-05-05T06:10:08.907Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "at": "2026-05-05T06:10:08.907Z"
+    },
+    {
+      "type": "console",
+      "message": "Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Fwww.bleepingcomputer.com%2Ffeed%2F' from origin 'http://127.0.0.1:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "at": "2026-05-05T06:10:08.913Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "at": "2026-05-05T06:10:08.913Z"
+    },
+    {
+      "type": "console",
+      "message": "Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Ffeeds.feedburner.com%2FTheHackersNews' from origin 'http://127.0.0.1:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "at": "2026-05-05T06:10:08.944Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "at": "2026-05-05T06:10:08.944Z"
+    },
+    {
+      "type": "console",
+      "message": "Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Fkrebsonsecurity.com%2Ffeed%2F' from origin 'http://127.0.0.1:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "at": "2026-05-05T06:10:08.948Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "at": "2026-05-05T06:10:08.948Z"
+    },
+    {
+      "type": "console",
+      "message": "Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Fwww.darkreading.com%2Frss.xml' from origin 'http://127.0.0.1:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "at": "2026-05-05T06:10:08.949Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "at": "2026-05-05T06:10:08.949Z"
+    },
+    {
+      "type": "console",
+      "message": "Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Ffeeds.feedburner.com%2Fsecurityweek' from origin 'http://127.0.0.1:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "at": "2026-05-05T06:10:08.968Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "at": "2026-05-05T06:10:08.968Z"
+    },
+    {
+      "type": "console",
+      "message": "Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Fwww.infosecurity-magazine.com%2Frss%2Fnews%2F' from origin 'http://127.0.0.1:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "at": "2026-05-05T06:10:09.013Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "at": "2026-05-05T06:10:09.013Z"
+    },
+    {
+      "type": "console",
+      "message": "Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Fgrahamcluley.com%2Ffeed%2F' from origin 'http://127.0.0.1:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "at": "2026-05-05T06:10:09.061Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "at": "2026-05-05T06:10:09.061Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 403 ()",
+      "at": "2026-05-05T06:10:09.095Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 404 ()",
+      "at": "2026-05-05T06:10:09.119Z"
+    },
+    {
+      "type": "console",
+      "message": "Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Fblog.talosintelligence.com%2Ffeeds%2Fposts%2Fdefault' from origin 'http://127.0.0.1:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "at": "2026-05-05T06:10:09.262Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "at": "2026-05-05T06:10:09.263Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 500 ()",
+      "at": "2026-05-05T06:10:10.444Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 429 ()",
+      "at": "2026-05-05T06:10:10.617Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 413 ()",
+      "at": "2026-05-05T06:10:12.949Z"
+    },
+    {
+      "type": "console",
+      "message": "Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Fwww.malwarebytes.com%2Fblog%2Ffeed' from origin 'http://127.0.0.1:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "at": "2026-05-05T06:10:14.059Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "at": "2026-05-05T06:10:14.059Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 520 ()",
+      "at": "2026-05-05T06:10:14.851Z"
+    },
+    {
+      "type": "console",
+      "message": "Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Fwww.cyber.gov.au%2Frss-feeds%2Frss.xml' from origin 'http://127.0.0.1:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "at": "2026-05-05T06:10:15.132Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "at": "2026-05-05T06:10:15.132Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 424 ()",
+      "at": "2026-05-05T06:10:15.250Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 413 ()",
+      "at": "2026-05-05T06:10:19.106Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 500 ()",
+      "at": "2026-05-05T06:10:19.346Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 408 ()",
+      "at": "2026-05-05T06:10:19.577Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_QUIC_PROTOCOL_ERROR",
+      "at": "2026-05-05T06:10:20.525Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 408 ()",
+      "at": "2026-05-05T06:10:23.734Z"
+    }
+  ],
+  "finishedAt": "2026-05-05T06:10:52.200Z"
+}

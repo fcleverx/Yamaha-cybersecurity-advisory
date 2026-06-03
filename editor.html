@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Editor - Awareness Newsletter</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <style>
+    body{margin:0;background:#FFFFFF;color:#000000;font-family:'DM Sans',sans-serif}
+    .wrap{max-width:1100px;margin:0 auto;padding:1rem}
+    .btn{border:1px solid rgba(0,0,0,.15);background:transparent;color:#000000;padding:.45rem .8rem;border-radius:6px;cursor:pointer;font-family:inherit;font-size:.82rem;font-weight:500;transition:background .15s,border-color .15s,color .15s}
+    .btn:hover{background:rgba(0,0,0,.05);border-color:rgba(0,0,0,.26);color:#000000}
+    .btn.primary{border-color:rgba(38,39,224,.55);color:#000000;background:rgba(38,39,224,.08)}
+    .btn.primary:hover{background:rgba(38,39,224,.16);border-color:#2627e0;color:#000000}
+    .editor-toolbar{display:flex;flex-wrap:wrap;gap:.55rem;align-items:center;margin-bottom:.85rem}
+    .editor-toolbar__sep{width:1px;height:26px;background:rgba(0,0,0,.10);flex-shrink:0}
+    .editor-file-group{display:inline-flex;flex-wrap:wrap;border-radius:8px;border:1px solid rgba(0,0,0,.10);overflow:hidden;background:rgba(0,0,0,.035);box-shadow:0 1px 0 rgba(0,0,0,.35)}
+    .editor-file-group .btn{border-radius:0;border-width:0 1px 0 0;margin:0;padding:.52rem .95rem;font-size:.78rem;min-height:42px;display:inline-flex;align-items:center;justify-content:center}
+    .editor-file-group .btn:last-child{border-right:0}
+    .editor-file-group .btn.btn--file-primary{background:linear-gradient(180deg,rgba(38,39,224,.22),rgba(160,120,8,.18));color:#000000;border-right-color:rgba(0,0,0,.09);font-weight:600}
+    .editor-file-group .btn.btn--file-primary:hover{background:linear-gradient(180deg,rgba(38,39,224,.32),rgba(160,120,8,.26));color:#000000}
+    .preview{background:#F5F5F7;border:1px solid rgba(0,0,0,.09);border-radius:8px;padding:.7rem}
+    .rollback-banner{
+      display:none;
+      margin:.2rem 0 .7rem;
+      padding:.6rem .75rem;
+      border-radius:8px;
+      border:1px solid rgba(234,187,93,.45);
+      background:rgba(234,187,93,.12);
+      color:#000000;
+      font-size:.76rem;
+      line-height:1.45;
+    }
+    #nl-out{max-width:700px;margin:0 auto;background:#fff;color:#000}
+    @media (max-width: 1024px){
+      .wrap{max-width:100%;padding:.8rem}
+      .btn{min-height:40px}
+    }
+    @media (max-width: 640px){
+      .wrap{padding:.6rem}
+      .editor-toolbar > .btn{flex:1;min-width:120px}
+      .preview{padding:.45rem}
+      #nl-out{max-width:100%}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 style="font-family:'DM Serif Display',serif;margin:.2rem 0 .8rem">Editor</h1>
+    <div id="ai-rollback-banner" class="rollback-banner" role="status" aria-live="polite"></div>
+    <div id="editor-version-row" class="editor-version-row" style="display:none;flex-wrap:wrap;gap:.5rem;align-items:center;margin:0 0 .85rem;padding:.55rem .65rem;border:1px solid rgba(0,0,0,.09);border-radius:8px;background:rgba(0,0,0,.025)">
+      <label for="editor-project-version-select" style="font-size:.75rem;color:#000000;white-space:nowrap">Saved versions</label>
+      <select id="editor-project-version-select" style="flex:1;min-width:160px;max-width:100%;background:#FFFFFF;border:1px solid rgba(0,0,0,.12);color:#000000;padding:.4rem .55rem;border-radius:6px"></select>
+      <button type="button" class="btn" onclick="App.UI.editorLoadSelectedProjectVersion()">Load</button>
+      <button type="button" class="btn primary" onclick="App.UI.editorRestoreSelectedVersionAsLatest()">Save as new latest</button>
+    </div>
+    <div class="editor-toolbar">
+      <button type="button" class="btn" onclick="App.RouterNav.goto('projects.html',{ source:'editor' })">Projects</button>
+      <button type="button" class="btn" onclick="window.location.href='config.html'">Config</button>
+      <button type="button" class="btn" onclick="window.location.href='keywords.html'">Keywords</button>
+      <button type="button" class="btn" onclick="App.UI.goToHomePage()">Home</button>
+      <button type="button" class="btn" onclick="App.UI.goToPreviewPage()">Preview</button>
+      <button type="button" class="btn" onclick="App.RouterNav.goto('send.html', App.RouterNav.getHandoff() || {})">Send</button>
+      <button type="button" class="btn primary" onclick="App.UI.openEditor()">Open Newsletter Editor</button>
+      <span class="editor-toolbar__sep" aria-hidden="true"></span>
+      <div class="editor-file-group" role="group" aria-label="Save and download">
+        <button type="button" class="btn btn--file-primary" onclick="App.UI.saveProjectVersion()" title="Save the full project (all language variants). If the newsletter editor is open, the canvas is synced first.">Save</button>
+        <button type="button" class="btn" onclick="App.UI.downloadCurrentHTML()" title="Download the selected language as one HTML file">Single file</button>
+        <button type="button" class="btn" onclick="App.UI.downloadAllHTML()" title="Download ZIP with html/ and svg/ folders for every language">All files</button>
+      </div>
+    </div>
+    <div class="preview">
+      <div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-bottom:.6rem">
+        <select id="preview-lang" onchange="App.UI.switchPreviewLanguage(this.value)"></select>
+        <select id="wf-next-state"></select>
+        <span id="wf-state-chip" style="padding:.3rem .6rem;border:1px solid #555;border-radius:999px">Draft</span>
+        <button class="btn" onclick="App.UI.transitionWorkflow()">Move</button>
+      </div>
+      <div class="nl" id="nl-out"></div>
+    </div>
+  </div>
+
+  <input id="cfg-freq" value="Weekly" hidden><input id="cfg-soc" value="SOC-support@abc.com" hidden>
+  <input id="cfg-max" value="2" hidden>
+  <input id="meta-title" value="Security Awareness Bulletin" hidden><input id="meta-issue-date" hidden><input id="meta-status" value="draft" hidden>
+  <input id="project-title" hidden><span id="project-version-label" hidden></span>
+  <input id="feat-poster" type="checkbox" checked hidden><input id="feat-links" type="checkbox" checked hidden><input id="feat-qr" type="checkbox" checked hidden><input id="feat-illus" type="checkbox" checked hidden>
+  <input id="feat-ai" type="checkbox" checked hidden><input id="ai-provider" value="claude" hidden><input id="ai-key" hidden>
+  <div id="saved-drafts-list" hidden></div><div id="delivery-log-list" hidden></div><div id="db-stats" hidden></div><div id="feed-status-area" hidden></div><div id="feed-sources-dashboard" hidden></div><div id="sb-feeds-list" hidden></div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/router_nav.js"></script>
+  <script src="js/ux_contract.js"></script>
+  <script src="js/feed_scoring.js"></script>
+  <script src="js/keyword_store.js"></script>
+  <script src="js/project_store.js"></script>
+  <script src="js/responsive_layout.js"></script>
+  <script src="js/rss_fetcher.js"></script>
+  <script src="js/ai_summarizer.js"></script>
+  <script src="js/graphics_engine.js"></script>
+  <script src="js/newsletter_builder.js"></script>
+  <script src="js/translation_metrics.js"></script>
+  <script src="js/delivery_helpers.js"></script>
+  <script src="js/ui_controller.js"></script>
+  <script src="js/editor.js"></script>
+  <script>
+    App.UXContract?.init({ pageId: 'editor', flowStepId: 'edit', guard: 'workspace-required' });
+    if (App.ResponsiveLayout?.init) App.ResponsiveLayout.init();
+    App.UI.init();
+  </script>
+</body>
+</html>
