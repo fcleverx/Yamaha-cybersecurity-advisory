@@ -19,7 +19,7 @@ jobs:
       - name: Run ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.14.0
         with:
-          target: 'https://demo.testfire.net'
+          target: 'https://fcleverx.github.io/Yamaha-cybersecurity-advisory/'
 
       - name: Upload Report
         uses: actions/upload-artifact@v4
